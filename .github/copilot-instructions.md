@@ -18,7 +18,6 @@ guidelines when contributing.
 ├── action.yml             # Action metadata
 ├── package.json
 ├── tsconfig.json
-├── rollup.config.ts       # Rollup bundler configuration
 └── vitest.config.ts       # Vitest configuration
 ```
 
@@ -26,7 +25,7 @@ guidelines when contributing.
 
 - **Language**: TypeScript
 - **Runtime**: Node.js (v20+)
-- **Bundler**: Rollup (bundles to single `dist/index.js`)
+- **Bundler**: @vercel/ncc (bundles to single `dist/index.js`)
 - **Testing**: Vitest
 - **Linting**: ESLint with TypeScript support
 - **Formatting**: Prettier
@@ -94,15 +93,6 @@ const octokit = new Octokit({ auth: token });
 const context = github.context;
 ```
 
-## File Extensions
-
-Use `.js` extensions in import statements for ESM compatibility:
-
-```typescript
-import { myFunction } from './utils.js'; // ✓ Correct
-import { myFunction } from './utils'; // ✗ Avoid
-```
-
 ## Testing Guidelines
 
 ### Test File Naming
@@ -166,28 +156,6 @@ process.env['INPUT_MY-INPUT'] = 'test-value';
 
 ## Bundling
 
-### Rollup Configuration
-
-Configure Rollup to bundle all dependencies into a single file:
-
-```typescript
-// rollup.config.ts
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-
-export default {
-  input: 'src/index.ts',
-  output: {
-    esModule: true,
-    file: 'dist/index.js',
-    format: 'es',
-    sourcemap: true,
-  },
-  plugins: [typescript(), nodeResolve({ preferBuiltins: true }), commonjs()],
-};
-```
-
 ### Build Process
 
 Always run the bundle before committing:
@@ -198,26 +166,6 @@ npm run bundle
 
 The `dist/` directory must be committed to the repository as GitHub Actions runs directly from the
 repository.
-
-## Package Scripts
-
-Standard npm scripts to include:
-
-```json
-{
-  "scripts": {
-    "bundle": "rollup -c rollup.config.ts --configPlugin typescript",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "lint": "eslint src __tests__",
-    "lint:fix": "eslint src __tests__ --fix",
-    "format": "prettier --write src __tests__",
-    "format:check": "prettier --check src __tests__",
-    "all": "npm run format && npm run lint && npm run test && npm run bundle"
-  }
-}
-```
 
 ## Action Metadata (action.yml)
 
@@ -304,8 +252,7 @@ Common packages:
 ### Dev Dependencies
 
 - `typescript`
-- `rollup` with plugins (`@rollup/plugin-commonjs`, `@rollup/plugin-node-resolve`,
-  `@rollup/plugin-typescript`)
+- `@vercel/ncc` for bundling
 - `vitest` with `@vitest/coverage-v8`
 - `eslint` with TypeScript plugins
 - `prettier`
