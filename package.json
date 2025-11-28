@@ -4,7 +4,7 @@
   "description": "Custom actions to look for potential Sha1-Hulud activity related to your GitHub Enterprise",
   "main": "dist/index.js",
   "scripts": {
-    "bundle": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "bundle": "tsc && ncc build src/index.ts -o dist --license licenses.txt",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -40,6 +40,8 @@
     "@vercel/ncc": "^0.38.3",
     "@vitest/coverage-v8": "^4.0.14",
     "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
     "prettier": "^3.7.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",

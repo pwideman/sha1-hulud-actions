@@ -1,4 +1,4 @@
-require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 4914:
@@ -25686,14 +25686,14 @@ exports.run = run;
 const core = __importStar(__nccwpck_require__(7484));
 async function run() {
     try {
-        core.info("Hello from the find-sha1-hulud-users action!");
+        core.info('Hello from the find-sha1-hulud-users action!');
     }
     catch (error) {
         if (error instanceof Error) {
             core.setFailed(error.message);
         }
         else {
-            core.setFailed("An unknown error occurred");
+            core.setFailed('An unknown error occurred');
         }
     }
 }
@@ -27627,4 +27627,3 @@ const main_1 = __nccwpck_require__(1730);
 module.exports = __webpack_exports__;
 /******/ })()
 ;
-//# sourceMappingURL=index.js.map
