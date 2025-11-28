@@ -1,0 +1,50 @@
+{
+  "name": "find-sha1-hulud-users",
+  "version": "0.1.0",
+  "description": "Custom actions to look for potential Sha1-Hulud activity related to your GitHub Enterprise",
+  "main": "dist/index.js",
+  "scripts": {
+    "bundle": "tsc && ncc build src/index.ts -o dist --license licenses.txt",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . --fix-dry-run",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write . --ignore-unknown",
+    "format:check": "prettier --check .",
+    "all": "npm run format:check && npm run lint && npm run test && npm run bundle"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "sha1-hulud"
+  ],
+  "author": "Paul Wideman",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwideman/find-sha1-hulud-users.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pwideman/find-sha1-hulud-users/issues"
+  },
+  "homepage": "https://github.com/pwideman/find-sha1-hulud-users#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@vercel/ncc": "^0.38.3",
+    "@vitest/coverage-v8": "^4.0.14",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.7.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vitest": "^4.0.14"
+  }
+}
