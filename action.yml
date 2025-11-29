@@ -6,6 +6,20 @@ branding:
   icon: 'search'
   color: 'orange'
 
+inputs:
+  github-token:
+    description: 'GitHub token with enterprise admin:org read permissions to access enterprise organizations and check membership'
+    required: true
+  enterprise:
+    description: 'The slug of the GitHub Enterprise to scan for potentially compromised users'
+    required: true
+
+outputs:
+  users-found:
+    description: 'Number of unique users with Sha1-Hulud repositories found in enterprise organizations'
+  repos-found:
+    description: 'Number of Sha1-Hulud repositories found'
+
 runs:
   using: 'node20'
   main: 'dist/index.js'
