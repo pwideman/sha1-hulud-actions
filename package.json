@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Custom actions to look for potential Sha1-Hulud activity related to your GitHub Enterprise",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "bundle": "tsc && ncc build src/index.ts -o dist --license licenses.txt",
     "test": "vitest run",
