@@ -114,28 +114,28 @@ async function checkUserMembershipInOrg(
   username: string,
 ): Promise<MembershipType> {
   try {
-    // First check if user is a member
+    // Check if user is a member (this checks both public and private membership)
     await octokit.rest.orgs.checkMembershipForUser({ org, username });
     return 'member';
   } catch {
-    // Not a member, check if outside collaborator
+    // Not a member, check if outside collaborator using pagination
     try {
-      await octokit.rest.orgs.checkPublicMembershipForUser({ org, username });
-      return 'member';
-    } catch {
-      // Check if outside collaborator by listing outside collaborators
-      try {
-        const response = await octokit.rest.orgs.listOutsideCollaborators({
-          org,
-          per_page: 100,
-        });
+      const iterator = octokit.paginate.iterator(octokit.rest.orgs.listOutsideCollaborators, {
+        org,
+        per_page: 100,
+      });
+
+      for await (const response of iterator) {
         const isCollaborator = response.data.some(
           (c: { login: string }) => c.login.toLowerCase() === username.toLowerCase(),
         );
-        return isCollaborator ? 'outside_collaborator' : 'none';
-      } catch {
-        return 'none';
+        if (isCollaborator) {
+          return 'outside_collaborator';
+        }
       }
+      return 'none';
+    } catch {
+      return 'none';
     }
   }
 }

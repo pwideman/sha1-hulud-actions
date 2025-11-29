@@ -23,28 +23,30 @@ This action helps identify GitHub Enterprise users that may have been compromise
 
 ## Inputs
 
-| Input | Description | Required |
-|-------|-------------|----------|
-| `github-token` | GitHub token with `admin:org` read permissions to access enterprise organizations and check membership | Yes |
-| `enterprise` | The slug of the GitHub Enterprise to scan for potentially compromised users | Yes |
+| Input          | Description                                                                                            | Required |
+| -------------- | ------------------------------------------------------------------------------------------------------ | -------- |
+| `github-token` | GitHub token with `admin:org` read permissions to access enterprise organizations and check membership | Yes      |
+| `enterprise`   | The slug of the GitHub Enterprise to scan for potentially compromised users                            | Yes      |
 
 ### Token Permissions
 
 The GitHub token needs the following permissions:
+
 - `read:org` - To list organizations in the enterprise
 - `read:enterprise` - To enumerate enterprise organizations
 - Organization membership read access for all organizations in the enterprise
 
 ## Outputs
 
-| Output | Description |
-|--------|-------------|
+| Output        | Description                                                                           |
+| ------------- | ------------------------------------------------------------------------------------- |
 | `users-found` | Number of unique users with Sha1-Hulud repositories found in enterprise organizations |
-| `repos-found` | Number of Sha1-Hulud repositories found |
+| `repos-found` | Number of Sha1-Hulud repositories found                                               |
 
 ## Artifacts
 
 The action produces a CSV artifact named `sha1-hulud-users` containing:
+
 - Username
 - Profile URL
 - Repository Count
@@ -59,8 +61,8 @@ name: Scan for Sha1-Hulud Users
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Run daily
-  workflow_dispatch:  # Allow manual trigger
+    - cron: '0 0 * * *' # Run daily
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   scan:

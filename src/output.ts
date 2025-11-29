@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os';
 import * as artifact from '@actions/artifact';
 import type { UserResult, SearchResult } from './github';
 
@@ -127,7 +128,7 @@ export async function uploadCSVArtifact(results: UserResult[]): Promise<void> {
   core.info('Generating CSV artifact...');
 
   const csvContent = generateCSVContent(results);
-  const tmpDir = process.env.RUNNER_TEMP || '/tmp';
+  const tmpDir = process.env.RUNNER_TEMP || os.tmpdir();
   const csvPath = path.join(tmpDir, 'sha1-hulud-users.csv');
 
   // Write CSV to temporary file
