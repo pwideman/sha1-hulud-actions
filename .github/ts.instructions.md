@@ -24,6 +24,9 @@ applyTo: '**/*.ts'
 - Use kebab-case filenames (e.g., `user-session.ts`, `data-service.ts`) unless told otherwise.
 - Keep tests, types, and helpers near their implementation when it aids discovery.
 - Reuse or extend shared utilities before adding new ones.
+- Use a modular approach; avoid monolithic files. Split large files into focused modules.
+- Apply the modular approach to functions: split large functions into smaller, focused functions.
+- Use integration boundaries for modules that interact with external systems or APIs. For example, all GitHub API calls should go through a dedicated 'github' module.
 
 ## Naming & Style
 

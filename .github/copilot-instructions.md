@@ -93,6 +93,10 @@ const octokit = new Octokit({ auth: token });
 const context = github.context;
 ```
 
+### Use modules
+
+Split functionality into separate modules under `src/` for better organization and testability. Group related functions and types together.
+
 ## Testing Guidelines
 
 ### Test File Naming
