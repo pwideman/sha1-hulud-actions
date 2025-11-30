@@ -4,12 +4,11 @@ A custom GitHub action to find Enterprise Organization members and outside colla
 
 ## Overview
 
-This action helps identify GitHub Enterprise users that may have been compromised by the Sha1-Hulud worm. It performs the following steps:
-
-1. **Enumerate Organizations**: Fetches all organizations in the specified GitHub Enterprise
-2. **Search for Infected Repositories**: Searches GitHub for public repositories containing the Sha1-Hulud signature ("Sha1-Hulud: The Second Coming")
-3. **Check User Memberships**: For each repository owner found, checks if they are a member or outside collaborator of any enterprise organization (with concurrent API requests and caching)
-4. **Generate Reports**: Produces a workflow summary with statistics and a detailed table, plus a CSV file for further analysis
+This action helps identify GitHub Enterprise users that may have been compromised by the Sha1-Hulud worm. Sha1-Hulud
+exfiltrates secrets by creating public repositories in the personal user space of compromised users. This action searches
+for all public repositories created by Sha1-Hulud (description includes "Sha1-Hulud: The Second Coming") then for each
+repository owner, determines whether that user is an organization member or outside collaborator for all organizations
+in the provided enterprise.
 
 ## Usage
 
